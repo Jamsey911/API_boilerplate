@@ -26,7 +26,7 @@ async function postForm(e) {
     const form = processOptions(new FormData(document.getElementById("checksform")));
 
     for (let entry of form.entries()) {
-        console.log(entry)
+        console.log(entry);
     }
 
     const response = await fetch(API_URL, {
@@ -85,18 +85,20 @@ function displayErrors(data) {
 
 
 async function getStatus(e) {
-    const querryString = `${API_URL}?api_key=${API_KEY}`;
 
-    const response = await fetch(querryString);
+    const queryString = `${API_URL}?api_key=${API_KEY}`;
+
+    const response = await fetch(queryString);
 
     const data = await response.json();
 
     if (response.ok) {
-        console.log(data)
+        displayStatus(data);
     } else {
         displayException(data);
-        throw new Error(data.Error);
+        throw new Error(data.error);
     }
+
 }
 
 function displayStatus(data) {
